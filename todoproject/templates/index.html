@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+     * {box-sizing: border-box}
+
+/* Add padding to containers */
+.container {
+  padding: 5px;
+  width:100%;
+ text-align:centre;
+ margin-left:2%;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] , input[type=date]{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit/register button */
+.registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity:1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+    </style>
+</head>
+<body>
+<h1 style="width:100%;text-align:center;background-color:lightblue;">TODO</h1>
+<div class="container">
+
+      <div class="row">
+
+          <div class="col-md-6">
+<form action="" method="POST" class="card shadow p-3">
+  {% csrf_token %}
+
+
+    <label for="name"><b>Name</b></label>
+    <input type="text" placeholder="Enter your name" name="name" id="name" >
+
+    <label for="priority"><b>Priority</b></label>
+    <input type="text" placeholder="Enter your priority" name="priority" id="priority" >
+
+<label for="date"><b>Date</b></label>
+    <input type="date" placeholder="Enter your date" name="date" id="date" >
+    <hr>
+
+
+    <button type="submit" class="registerbtn">Submit</button>
+
+
+</form>
+               </div>
+
+      <div class="col-md-5 ml-1">
+          <h4>Task to be completed</h4>
+           <hr>
+
+         {% for i in taskdetails %}
+           <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+               <div class="ml-2">
+<h5>{{i.name}}</h5>
+{{i.priority}}<br>
+                   {{i.date}}<br>
+                   <a class="btn-sm btn-danger" href="{% url 'delete' i.id %}">Done</a>
+                   <a class="btn-sm btn-success" href="{% url 'update' i.id %}">Update</a>
+                   </div>
+                </div>
+{% endfor %}
+
+           <hr>
+      </div>
+          </div>
+  </div>
+
+</body>
+</html>
